@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>RenaScape - Dice Roller</title>
+<title>RenaScape - Settings</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="src/dice.js"></script> 
+<script src="src/settings.js"></script> 
 
 <body class="w3-content" style="max-width:1200px">
 
@@ -44,7 +44,7 @@
 	  
 	  <!-- Top header -->
 	  <header class="w3-container w3-xlarge">
-		<p class="w3-left">Dice Roller</p>
+		<p class="w3-left">Settings</p>
 		<p class="w3-right">
 		  <!-- <i class="fa fa-shopping-cart w3-margin-right"></i>
 		  <i class="fa fa-search"></i> -->
@@ -52,41 +52,12 @@
 	  </header>
 
 	  <div>
-		<button type="button" onclick="roll('d20')">d20</button>
-		<p id="d20Result" style="display: inline;">0</p>
-	  </div>
-	  <br>
-	  <div>
-		<button type="button" onclick="roll('d20')">d12</button>
-		<p id="d20Result" style="display: inline;">0</p>
-	  </div>
-	  <br>
-	  <div>
-		<button type="button" onclick="roll('d20')">d10</button>
-		<p id="d20Result" style="display: inline;">0</p>
-	  </div>
-	  <br>
-	  <div>
-		<button type="button" onclick="roll('d20')">d8</button>
-		<p id="d20Result" style="display: inline;">0</p>
-	  </div>
-	  <br>
-	  <div>
-		<button type="button" onclick="roll('d20')">d6</button>
-		<p id="d20Result" style="display: inline;">0</p>
-	  </div>
-	  <br>
-	  <div>
-		<button type="button" onclick="roll('d20')">d4</button>
-		<p id="d20Result" style="display: inline;">0</p>
-	  </div>
-	  <br>
-	  <div>
-		<button type="button" onclick="roll('d20')">d100</button>
-		<p id="d20Result" style="display: inline;">0</p>
-	  </div>
-	  <br>
+		<p>Load Monsters from Json to Database</p>
+		<button id="btnLoadMonster" type="button" onclick="loadMonsters()">Load</button>
+		<p id="monsterLoadDone" style="display: inline;"></p>
 
+	  </div>
+	  <div><p></p></div>
 	
 	  <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
 	
@@ -95,7 +66,7 @@
 	
 	
 	<script>
-
+	
 	// Open and close sidebar
 	function w3_open() {
 	  document.getElementById("mySidebar").style.display = "block";
