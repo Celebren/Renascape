@@ -26,7 +26,6 @@ function roll(sDie) {
 			break;
 	}
 
-		
 	fetch(sUrl)
 	.then(response => response.json())
 	.then(response => {

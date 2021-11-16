@@ -10,13 +10,9 @@ Class Database {
 	private static $conn = null;
 
 	private static function connector() {
-		$sServer = "localhost";
-		$sUser = "root";
-		$password = "";
-		$sDb = "renascape";
-
 		// Create connection
-		self::$conn = new \mysqli($sServer, $sUser, $password, $sDb);
+		$aData = json_decode(file_get_contents("../scape.ini"), true);
+		self::$conn = new \mysqli($aData["Server"], $aData["User"], $aData["Pass"], $aData["Db"]);
 
 		// Check connection
 		if (self::$conn->connect_error) {
