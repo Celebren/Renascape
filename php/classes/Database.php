@@ -9,15 +9,22 @@ namespace Database;
 Class Database {
 	private static $conn = null;
 
-	private static function connector() {
-		// Create connection
-		$aData = json_decode(file_get_contents("../scape.ini"), true);
-		self::$conn = new \mysqli($aData["Server"], $aData["User"], $aData["Pass"], $aData["Db"]);
-
-		// Check connection
-		if (self::$conn->connect_error) {
-			die("Connection failed: " . self::$conn->connect_error);
+	private static function connector() : void {
+		if (!isset(self::$conn)) {
+			// Create connection
+			$aData = json_decode(file_get_contents("../scape.ini"), true);
+			self::$conn = new \mysqli($aData["Server"], $aData["User"], $aData["Pass"], $aData["Db"]);
+	
+			// Check connection
+			if (self::$conn->connect_error) {
+				die("Connection failed: " . self::$conn->connect_error);
+			}
 		}
+	}
+
+	private static function closeConnection() : void {
+		self::$conn->close();
+		self::$conn = null;
 	}
 
 	/**
@@ -40,7 +47,7 @@ Class Database {
 			error_log("Error selecting from database: " . self::$conn->error);
 		}
 
-		self::$conn->close();
+		self::closeConnection();
 		return $rows;
 	}
 
@@ -57,9 +64,11 @@ Class Database {
 			$id = self::$conn->insert_id;
 		} else {
 			error_log("Error inserting to database: " . self::$conn->error);
+			error_log($sql);
+
 		}
 
-		self::$conn->close();
+		self::closeConnection();
 		return $id;
 	}
 
@@ -78,6 +87,11 @@ Class Database {
 			error_log("Error deleting record: " . self::$conn->error);
 		}
 		
-		self::$conn->close();
+		self::closeConnection();
+	}
+
+	public static function escapeString(string $s) : string {
+		self::connector();
+		return self::$conn->real_escape_string($s);
 	}
 }

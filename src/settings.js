@@ -1,5 +1,5 @@
 function loadMonsters() {
-	let sUrl = "php/loadMonsters.php?";
+	let sUrl = "php/monsterRouter.php?q=loadIntoDb";
 	let elem = document.getElementById("monsterLoadDone");
 	let eBtn = document.getElementById("btnLoadMonster");
 	fetch(sUrl)
